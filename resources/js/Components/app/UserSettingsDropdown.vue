@@ -2,11 +2,11 @@
     <Menu as="div" class="relative inline-block text-left">
             <div>
                 <MenuButton
-                    class="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+                    class="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
                 >
                     {{ $page.props.auth.user.name }}
                     <ChevronDownIcon
-                        class="-mr-1 ml-2 h-5 w-5 text-violet-200 hover:text-violet-100"
+                        class="-mr-1 ml-2 h-5 w-5 text-gray-800"
                         aria-hidden="true"
                     />
                 </MenuButton>
@@ -21,39 +21,33 @@
                 leave-to-class="transform scale-95 opacity-0"
             >
                 <MenuItems
-                    class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+                    class="absolute right-0 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
                 >
                     <div class="px-1 py-1">
                         <MenuItem v-slot="{ active }">
-                            <button
+                            <ResponsiveNavLink
+                                :href="route('profile.edit')"
                                 :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                ]"
+                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                    'block px-4 py-2 text-sm'
+                                ]"
                             >
-                                <UserCircleIcon
-                                    :active="active"
-                                    class="mr-2 h-5 w-5 text-violet-400"
-                                    aria-hidden="true"
-                                />
                                 Profile
-                            </button>
+                            </ResponsiveNavLink>
                         </MenuItem>
 
                         <MenuItem v-slot="{ active }">
-                            <button
+                            <ResponsiveNavLink
+                                :href="route('logout')"
+                                method="post"
+                                as="button"
                                 :class="[
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                ]"
+                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                    'block px-4 py-2 text-sm'
+                                ]"
                             >
-                                <ArrowRightStartOnRectangleIcon
-                                    :active="active"
-                                    class="mr-2 h-5 w-5 text-violet-400"
-                                    aria-hidden="true"
-                                />
-                                Log out
-                            </button>
+                                Logout
+                            </ResponsiveNavLink>
                         </MenuItem>
                     </div>
                 </MenuItems>
@@ -62,6 +56,7 @@
 </template>
 
 <script setup>
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import { ChevronDownIcon, ArrowRightStartOnRectangleIcon, UserCircleIcon } from '@heroicons/vue/20/solid'
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
+import { ChevronDownIcon } from '@heroicons/vue/20/solid';
+import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 </script>
